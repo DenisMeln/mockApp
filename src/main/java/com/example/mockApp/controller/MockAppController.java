@@ -11,14 +11,17 @@ import javax.validation.Valid;
 
 @RestController
 public class MockAppController {
-    @GetMapping("/get")
-    public ResponseEntity<String> getInfo(){
+    private static final int delay = 1000;
 
+    @GetMapping("/get")
+    public ResponseEntity<String> getInfo() throws InterruptedException{
+        Thread.sleep(delay);
         return ResponseEntity.ok("{\"login\":\"Login1\",\"status\":\"ok\"}");
     }
 
     @PostMapping("/post")
-    public ResponseEntity<User> postInfo(@Valid @RequestBody User user){
+    public ResponseEntity<User> postInfo(@Valid @RequestBody User user) throws InterruptedException{
+        Thread.sleep(delay);
         User responseUser = new User(user.getLogin(), user.getPassword());
         return ResponseEntity.ok(responseUser);
     }
