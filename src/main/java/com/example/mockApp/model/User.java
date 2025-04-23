@@ -1,19 +1,19 @@
     package com.example.mockApp.model;
 
+    import jakarta.validation.constraints.NotEmpty;
     import lombok.*;
 
     import java.text.SimpleDateFormat;
     import java.util.Date;
 
-    import javax.validation.constraints.NotBlank;
     @Data
     @NoArgsConstructor
     @Getter
     @Setter
     public class User {
-        @NotBlank(message = "Необходимо ввести Login")
+        @NotEmpty(message = "Необходимо ввести Login")
         private String login;
-        @NotBlank(message = "Необходимо ввести Password")
+        @NotEmpty(message = "Необходимо ввести Password")
         private String password;
         private String date;
 
