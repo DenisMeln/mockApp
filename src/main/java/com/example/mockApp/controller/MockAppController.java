@@ -18,19 +18,24 @@ import java.util.Random;
 public class MockAppController {
     private static final Random random = new Random();
 
-    private void randomDelay() throws InterruptedException {
+    private void randomDelay() {
         int delay = 1000 + random.nextInt(1000);
-        Thread.sleep(delay);
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("Поток был прерван во время выполнения", ex);
+        }
     }
 
     @GetMapping("/get")
-    public ResponseEntity<?> getInfo() throws InterruptedException{
+    public ResponseEntity<?> getInfo(){
         randomDelay();
         return ResponseEntity.ok("{\"login\":\"Login1\",\"status\":\"ok\"}");
     }
 
     @PostMapping("/post")
-    public ResponseEntity<?> postInfo(@Valid @RequestBody User user) throws InterruptedException{
+    public ResponseEntity<?> postInfo(@Valid @RequestBody User user){
         randomDelay();
         user.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         return ResponseEntity.ok(user);
