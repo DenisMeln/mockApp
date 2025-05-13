@@ -7,9 +7,9 @@ import java.sql.*;
 import java.util.Date;
 @Component
 public class DataBaseWorker {
-    private static final String url = "jdbc:postgresql://localhost:5432/postgres";
-    private static final String username = "admin";
-    private static final String password = "admin";
+    private static final String url = System.getenv().getOrDefault("DB_URL", "jdbc:postgresql://localhost:5432/postgres");
+    private static final String username = System.getenv().getOrDefault("DB_USER", "admin");
+    private static final String password = System.getenv().getOrDefault("DB_PASSWORD", "admin");
 
     public DataBaseWorker() {
     }
