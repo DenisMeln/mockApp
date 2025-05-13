@@ -1,5 +1,6 @@
     package com.example.mockApp.model;
 
+    import jakarta.validation.constraints.Email;
     import jakarta.validation.constraints.NotEmpty;
     import lombok.*;
 
@@ -7,7 +8,7 @@
     import java.util.Date;
 
     @Data
-    @NoArgsConstructor
+    @AllArgsConstructor
     @Getter
     @Setter
     public class User {
@@ -15,5 +16,7 @@
         private String login;
         @NotEmpty(message = "Необходимо ввести Password")
         private String password;
-        private String date;
+        @Email(message = "Email должен быть корректным")
+        private String email;
+        private Date date;
     }
